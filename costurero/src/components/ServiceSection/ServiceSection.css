@@ -1,0 +1,133 @@
+/* Service Section Component Styles */
+.service-section {
+  padding: 5rem 0;
+}
+
+.service-section:nth-child(odd) {
+  background-color: var(--color-off-white);
+}
+
+.service-section:nth-child(even) {
+  background-color: var(--color-white);
+}
+
+.service-content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.service-section.reverse .service-content {
+  flex-direction: row-reverse;
+}
+
+.service-image-container {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.service-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.service-image-container:hover .service-image {
+  transform: scale(1.05);
+}
+
+.service-details {
+  flex: 1;
+}
+
+.service-title {
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  color: var(--color-black);
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.service-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-gold);
+}
+
+.service-section.reverse .service-title::after {
+  left: 0;
+}
+
+.service-description {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-black-light);
+  margin-bottom: 2rem;
+}
+
+.service-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+}
+
+.service-feature-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.service-feature-item i {
+  color: var(--color-gold);
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.service-feature-item span {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Media Queries */
+@media (max-width: 992px) {
+  .service-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .service-section.reverse .service-content {
+    flex-direction: column;
+  }
+
+  .service-image-container {
+    width: 100%;
+  }
+
+  .service-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-section {
+    padding: 4rem 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .service-title {
+    font-size: 1.5rem;
+  }
+
+  .service-description {
+    font-size: 0.95rem;
+  }
+}

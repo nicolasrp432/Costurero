@@ -1,0 +1,613 @@
+/* Pricing Page Styles */
+.pricing-page {
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.pricing-hero {
+  height: 50vh;
+  min-height: 400px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: var(--color-white);
+  /* Placeholder background image - replace with actual image */
+  background-image: url('/images/pricing/pricing-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 80px; /* Adjust based on navbar height */
+}
+
+.pricing-hero .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+}
+
+.pricing-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.pricing-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--color-white);
+  line-height: 1.2;
+  font-family: var(--font-primary);
+}
+
+.pricing-hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+/* Price Calculator Section */
+.calculator-section {
+  padding: 5rem 0;
+  background-color: var(--color-white);
+}
+
+.calculator-container {
+  max-width: 1000px;
+  margin: 3rem auto 0;
+  display: flex;
+  background-color: var(--color-white);
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.calculator-form {
+  flex: 1.5;
+  padding: 2.5rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.calculator-result {
+  flex: 1;
+  padding: 2.5rem;
+  background-color: var(--color-off-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.calculator-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.calculator-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.calculator-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--color-black);
+}
+
+.calculator-group select,
+.calculator-group input {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  font-family: var(--font-secondary);
+  font-size: 0.95rem;
+  color: var(--color-black);
+  background-color: var(--color-white);
+  transition: all 0.3s ease;
+}
+
+.calculator-group select:focus,
+.calculator-group input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.calculator-group select:disabled,
+.calculator-group input:disabled {
+  background-color: #f8f8f8;
+  cursor: not-allowed;
+}
+
+.calculator-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.calculator-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-gold);
+}
+
+.calculator-checkbox label {
+  font-size: 0.95rem;
+  color: var(--color-black);
+}
+
+.calculator-submit {
+  display: flex;
+  justify-content: center;
+}
+
+.calculator-result h3 {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-black);
+}
+
+.price-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-amount {
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--color-burgundy);
+  margin-bottom: 1rem;
+}
+
+.price-note {
+  font-size: 0.85rem;
+  color: var(--color-black-light);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.empty-result {
+  font-size: 0.95rem;
+  color: var(--color-black-light);
+  line-height: 1.6;
+}
+
+/* Price Lists Section */
+.price-lists-section {
+  padding: 5rem 0;
+  background-color: var(--color-off-white);
+}
+
+.pricing-tabs {
+  max-width: 900px;
+  margin: 3rem auto 0;
+}
+
+.tabs-header {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gold);
+  color: var(--color-black);
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+  background-color: var(--color-gold);
+  color: var(--color-black);
+}
+
+.tabs-content {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.price-table {
+  display: none;
+  padding: 2rem;
+}
+
+.price-table.active {
+  display: block;
+}
+
+.price-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.price-table th {
+  padding: 1rem;
+  background-color: var(--color-gold-light);
+  color: var(--color-black);
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.price-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  color: var(--color-black-light);
+}
+
+.price-table tr:last-child td {
+  border-bottom: none;
+}
+
+.price-table td:last-child {
+  font-weight: 600;
+  color: var(--color-burgundy);
+  text-align: right;
+}
+
+/* Special Offers Section */
+.special-offers-section {
+  padding: 5rem 0;
+  background-color: var(--color-white);
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.offer-card {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.offer-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.offer-card.featured {
+  border: 2px solid var(--color-gold);
+  transform: scale(1.05);
+}
+
+.offer-card.featured:hover {
+  transform: scale(1.05) translateY(-10px);
+}
+
+.offer-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-burgundy);
+  color: var(--color-white);
+  padding: 0.4rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.offer-card h3 {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-black);
+}
+
+.offer-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-black-light);
+  margin-bottom: 2rem;
+  min-height: 100px;
+}
+
+.offers-note {
+  font-size: 0.85rem;
+  color: var(--color-black-light);
+  font-style: italic;
+}
+
+/* Payment Methods Section */
+.payment-section {
+  padding: 5rem 0;
+  background-color: var(--color-off-white);
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.payment-method {
+  flex: 1;
+  max-width: 250px;
+  background-color: var(--color-white);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.payment-method:hover {
+  transform: translateY(-10px);
+}
+
+.payment-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.payment-icon i {
+  font-size: 1.8rem;
+  color: var(--color-white);
+}
+
+.payment-method h3 {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--color-black);
+}
+
+.payment-method p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-black-light);
+}
+
+.payment-policy {
+  margin-top: 4rem;
+}
+
+.payment-policy h3 {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-black);
+}
+
+.policy-list {
+  list-style: none;
+  padding: 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.policy-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  background-color: var(--color-white);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.policy-list li i {
+  color: var(--color-gold);
+  margin-right: 1rem;
+  margin-top: 3px;
+}
+
+.policy-list li span {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-black-light);
+}
+
+/* Pricing CTA Section */
+.pricing-cta {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/pricing/pricing-cta.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 5rem 0;
+  color: var(--color-white);
+}
+
+.pricing-cta .cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pricing-cta h2 {
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-white);
+}
+
+.pricing-cta p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--color-gray);
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .offers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .payment-methods {
+    flex-wrap: wrap;
+  }
+  
+  .payment-method {
+    flex-basis: calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 992px) {
+  .pricing-hero {
+    height: auto;
+    padding: 6rem 0;
+  }
+
+  .pricing-hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .pricing-hero p {
+    font-size: 1.1rem;
+  }
+
+  .calculator-container {
+    flex-direction: column;
+  }
+
+  .calculator-form {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .offer-card.featured {
+    transform: none;
+    grid-column: span 2;
+  }
+
+  .offer-card.featured:hover {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .pricing-hero p {
+    font-size: 1rem;
+  }
+
+  .calculator-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tabs-header {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    width: calc(50% - 0.5rem);
+    text-align: center;
+  }
+
+  .offers-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .offer-card.featured {
+    grid-column: auto;
+  }
+
+  .payment-methods {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .payment-method {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .pricing-cta h2 {
+    font-size: 2rem;
+  }
+
+  .pricing-cta p {
+    font-size: 1rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .pricing-hero {
+    padding: 5rem 0;
+  }
+
+  .pricing-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .calculator-form,
+  .calculator-result {
+    padding: 1.5rem;
+  }
+
+  .price-table {
+    padding: 1rem;
+  }
+
+  .price-table th,
+  .price-table td {
+    padding: 0.8rem;
+    font-size: 0.85rem;
+  }
+}
