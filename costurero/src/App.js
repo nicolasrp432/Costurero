@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 // Layout Components
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import FloatingWhatsAppButton from './components/FloatingWhatsAppButton/FloatingWhatsAppButton';
 
 // Pages
 import Home from './pages/Home';
@@ -37,6 +38,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <FloatingWhatsAppButton />
     </div>
   );
 }

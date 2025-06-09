@@ -1,0 +1,26 @@
+.floating-whatsapp-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.floating-whatsapp-button:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  transform: scale(1.08);
+}
+
+.floating-whatsapp-button svg {
+  display: block;
+} 
