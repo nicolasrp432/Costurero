@@ -1,20 +1,39 @@
 import axios from 'axios';
-
-const API_KEY = 'JCO3fseEUIJvG+sbbKqQvg==Q8Bjr5jzJVoqPk9x'; // Necesitarás obtener una API key de api-ninjas.com
+import { config } from '../config/appConfig';
+import mockHolidays from '../mocks/holidays.json';
 
 // Crear una instancia de axios con la configuración base
 const api = axios.create({
-  baseURL: 'https://api.api-ninjas.com/v1',
+  baseURL: config.api.baseURL,
   headers: {
-    'X-Api-Key': API_KEY,
+    'X-Api-Key': config.api.apiKey,
     'Content-Type': 'application/json'
   }
 });
+
+// Función para simular un delay en las respuestas mock
+const mockDelay = (ms = 1) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const getHolidays = async (year) => {
   try {
     console.log('Fetching holidays for year:', year);
     
+    if (config.useMockData) {
+      console.log('Using mock data');
+      // Simular delay de red
+      await mockDelay();
+      
+      // Filtrar los días festivos para el año solicitado
+      const currentYearHolidays = mockHolidays.holidays.filter(holiday => {
+        const holidayDate = new Date(holiday.date);
+        return holidayDate.getFullYear() === year;
+      });
+      
+      console.log('Mock holidays data received:', currentYearHolidays);
+      return currentYearHolidays;
+    }
+    
+    // Si no estamos usando mock, hacer la llamada real a la API
     const response = await api.get('/holidays', {
       params: {
         country: 'ES'
@@ -27,7 +46,7 @@ export const getHolidays = async (year) => {
       return holidayDate.getFullYear() === year;
     });
     
-    console.log('Holidays data received:', currentYearHolidays);
+    console.log('API holidays data received:', currentYearHolidays);
     return currentYearHolidays;
   } catch (error) {
     console.error('Error details:', {

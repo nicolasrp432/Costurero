@@ -1,0 +1,59 @@
+{
+  "holidays": [
+    {
+      "name": "Año Nuevo",
+      "date": "2024-01-01",
+      "type": "Nacional"
+    },
+    {
+      "name": "Día de Reyes",
+      "date": "2024-01-06",
+      "type": "Nacional"
+    },
+    {
+      "name": "Jueves Santo",
+      "date": "2024-03-28",
+      "type": "Religioso"
+    },
+    {
+      "name": "Viernes Santo",
+      "date": "2024-03-29",
+      "type": "Religioso"
+    },
+    {
+      "name": "Día del Trabajo",
+      "date": "2024-05-01",
+      "type": "Nacional"
+    },
+    {
+      "name": "Día de la Asunción",
+      "date": "2024-08-15",
+      "type": "Religioso"
+    },
+    {
+      "name": "Día de la Hispanidad",
+      "date": "2024-10-12",
+      "type": "Nacional"
+    },
+    {
+      "name": "Día de Todos los Santos",
+      "date": "2024-11-01",
+      "type": "Religioso"
+    },
+    {
+      "name": "Día de la Constitución",
+      "date": "2024-12-06",
+      "type": "Nacional"
+    },
+    {
+      "name": "Inmaculada Concepción",
+      "date": "2024-12-08",
+      "type": "Religioso"
+    },
+    {
+      "name": "Navidad",
+      "date": "2024-12-25",
+      "type": "Religioso"
+    }
+  ]
+} 
