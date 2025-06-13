@@ -83,6 +83,11 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink to="/calendario" className={({ isActive }) => isActive ? 'active' : ''}>
+                Calendario
+              </NavLink>
+            </li>
+            <li>
               <NavLink to="/contacto" className="contact-btn">
                 Contacto
               </NavLink>
@@ -153,6 +158,15 @@ const Navbar = () => {
                 >
                   <NavLink to="/nosotros" onClick={closeMenu}>
                     Nosotros
+                  </NavLink>
+                </motion.li>
+                <motion.li
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.65 }}
+                >
+                  <NavLink to="/calendario" onClick={closeMenu}>
+                    Calendario
                   </NavLink>
                 </motion.li>
                 <motion.li

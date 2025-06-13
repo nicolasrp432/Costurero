@@ -7,6 +7,16 @@ import './Hero.css';
 const Hero = () => {
   return (
     <section className="hero">
+      <video
+        className="hero-video"
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src="./src/assets/hero-video.mp4" type="video/mp4" />
+        {/* Add additional source elements for different video formats if needed */}
+      </video>
       <div className="hero-overlay"></div>
       <div className="container hero-container">
         <motion.div 

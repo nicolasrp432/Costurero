@@ -15,6 +15,7 @@ import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
+import Calendar from './pages/Calendar/Calendar';
 
 function App() {
   // Scroll to top on page change
@@ -34,6 +35,7 @@ function App() {
           <Route path="/precios" element={<Pricing />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/nosotros" element={<About />} />
+          <Route path="/calendario" element={<Calendar />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
