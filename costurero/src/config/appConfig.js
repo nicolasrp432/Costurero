@@ -1,7 +1,7 @@
 // Configuración de la aplicación
 export const config = {
   // Cambiar a false para usar la API real
-  useMockData: true,
+  useMockData: false,
   
   // Configuración de la API
   api: {
