@@ -1,11 +1,11 @@
 // Configuración de la aplicación
 export const config = {
   // Cambiar a false para usar la API real
-  useMockData: false,
+  useMockData: import.meta.env.VITE_USE_MOCK_DATA === 'true',
   
   // Configuración de la API
   api: {
-    baseURL: 'https://api.api-ninjas.com/v1',
-    apiKey: 'JCO3fseEUIJvG+sbbKqQvg==Q8Bjr5jzJVoqPk9x'
+    baseURL: import.meta.env.VITE_API_BASE_URL || 'https://api.api-ninjas.com/v1',
+    apiKey: import.meta.env.VITE_API_KEY
   }
 }; 
