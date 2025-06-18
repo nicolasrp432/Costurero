@@ -19,23 +19,26 @@ export const googleConfig = {
   // Configuración del mapa
   MAP_CONFIG: {
     zoom: 15,
-    styles: [
-      {
-        featureType: 'all',
-        elementType: 'geometry',
-        stylers: [{ color: '#f5f5f5' }]
-      },
-      {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{ color: '#c9c9c9' }]
-      },
-      {
-        featureType: 'poi',
-        elementType: 'labels.text.fill',
-        stylers: [{ color: '#757575' }]
-      }
-    ]
+    // Usar el ID de estilos de Google Wizard
+    mapId: 'cde37e1afc807cb6f8745a1e',
+    // Comentamos los estilos personalizados para ver el mapa normal
+    // styles: [
+    //   {
+    //     featureType: 'all',
+    //     elementType: 'geometry',
+    //     stylers: [{ color: '#f5f5f5' }]
+    //   },
+    //   {
+    //     featureType: 'water',
+    //     elementType: 'geometry',
+    //     stylers: [{ color: '#c9c9c9' }]
+    //   },
+    //   {
+    //     featureType: 'poi',
+    //     elementType: 'labels.text.fill',
+    //     stylers: [{ color: '#757575' }]
+    //   }
+    // ]
   }
 };
 

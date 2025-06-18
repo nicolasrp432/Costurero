@@ -1,30 +1,51 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { googleConfig, getGoogleMapsUrl, fetchGoogleReviews } from '../../config/googleConfig';
+import { googleConfig, getGoogleMapsUrl } from '../../config/googleConfig';
+import { fetchRealGoogleReviews, fetchPlaceDetails, formatGoogleReview } from '../../services/googleReviewsService';
 import './GoogleMap.css';
 
 const GoogleMap = () => {
   const mapRef = useRef(null);
   const reviewsRef = useRef(null);
   const [googleReviews, setGoogleReviews] = useState([]);
+  const [placeDetails, setPlaceDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mapError, setMapError] = useState(false);
 
   useEffect(() => {
-    // Cargar reseñas de Google
-    const loadReviews = async () => {
+    // Cargar reseñas reales de Google y detalles del lugar
+    const loadReviewsAndDetails = async () => {
       try {
-        const reviews = await fetchGoogleReviews();
-        setGoogleReviews(reviews);
+        setLoading(true);
+        
+        // Cargar reseñas y detalles en paralelo
+        const [reviews, details] = await Promise.all([
+          fetchRealGoogleReviews(),
+          fetchPlaceDetails()
+        ]);
+        
+        // Formatear reseñas si vienen de Google Places
+        const formattedReviews = reviews.map(review => 
+          review.author_name ? formatGoogleReview(review) : review
+        );
+        
+        setGoogleReviews(formattedReviews);
+        setPlaceDetails(details);
+        
+        console.log('✅ Datos cargados:', {
+          reviews: formattedReviews.length,
+          placeDetails: details
+        });
       } catch (error) {
-        console.warn('Error al cargar reseñas:', error);
+        console.warn('Error al cargar datos:', error);
         setGoogleReviews([]);
+        setPlaceDetails(null);
       } finally {
         setLoading(false);
       }
     };
 
-    loadReviews();
+    loadReviewsAndDetails();
   }, []);
 
   useEffect(() => {
@@ -38,7 +59,7 @@ const GoogleMap = () => {
               lng: googleConfig.DEFAULT_LOCATION.lng 
             },
             zoom: googleConfig.MAP_CONFIG.zoom,
-            styles: googleConfig.MAP_CONFIG.styles,
+            mapId: googleConfig.MAP_CONFIG.mapId,
             mapTypeControl: false,
             fullscreenControl: false,
             streetViewControl: false,
@@ -131,9 +152,11 @@ const GoogleMap = () => {
     });
   };
 
-  const averageRating = googleReviews.length > 0 
+  const averageRating = placeDetails?.rating || (googleReviews.length > 0 
     ? (googleReviews.reduce((sum, review) => sum + review.rating, 0) / googleReviews.length).toFixed(1)
-    : '4.9';
+    : '4.9');
+
+  const totalReviews = placeDetails?.totalReviews || googleReviews.length || 5;
 
   return (
     <section className="google-map-section">
@@ -204,7 +227,7 @@ const GoogleMap = () => {
                 </div>
                 <div className="rating-info">
                   <h3>{averageRating}</h3>
-                  <p>Basado en {googleReviews.length || 5} reseñas</p>
+                  <p>Basado en {totalReviews} reseñas</p>
                 </div>
               </div>
               <div className="google-logo">
