@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { fetchRealGoogleReviews, fetchPlaceDetails, formatGoogleReview } from '../../services/googleReviewsService';
 import './Testimonials.css';
 
 const testimonialData = [
@@ -41,60 +42,50 @@ const testimonialData = [
   },
 ];
 
-// Datos de reseñas de Google (simulados)
-const googleReviews = [
-  {
-    id: 1,
-    author: 'María González',
-    rating: 5,
-    date: '2024-01-15',
-    content: 'Excelente servicio de costura. Muy profesional y puntual. Recomendado 100%.',
-    profileImage: 'https://via.placeholder.com/40x40/FFD700/FFFFFF?text=M',
-    verified: true
-  },
-  {
-    id: 2,
-    author: 'Carlos López',
-    rating: 5,
-    date: '2024-01-10',
-    content: 'Arreglaron mi traje perfectamente. Muy buena calidad y precio justo.',
-    profileImage: 'https://via.placeholder.com/40x40/FFD700/FFFFFF?text=C',
-    verified: true
-  },
-  {
-    id: 3,
-    author: 'Ana Rodríguez',
-    rating: 5,
-    date: '2024-01-08',
-    content: 'Las clases de costura son fantásticas. Aprendí muchísimo en poco tiempo.',
-    profileImage: 'https://via.placeholder.com/40x40/FFD700/FFFFFF?text=A',
-    verified: true
-  },
-  {
-    id: 4,
-    author: 'Luis Fernández',
-    rating: 5,
-    date: '2024-01-05',
-    content: 'Servicio excepcional. Muy detallistas y profesionales en su trabajo.',
-    profileImage: 'https://via.placeholder.com/40x40/FFD700/FFFFFF?text=L',
-    verified: true
-  },
-  {
-    id: 5,
-    author: 'Carmen Ruiz',
-    rating: 5,
-    date: '2024-01-03',
-    content: 'Perfecto trabajo en mi vestido de novia. Superó todas mis expectativas.',
-    profileImage: 'https://via.placeholder.com/40x40/FFD700/FFFFFF?text=C',
-    verified: true
-  }
-];
-
 const Testimonials = () => {
   const [current, setCurrent] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
   const [activeTab, setActiveTab] = useState('testimonials'); // 'testimonials' o 'google'
+  const [googleReviews, setGoogleReviews] = useState([]);
+  const [placeDetails, setPlaceDetails] = useState(null);
+  const [loading, setLoading] = useState(false);
   const length = testimonialData.length;
+
+  // Cargar reseñas reales de Google cuando se active la pestaña
+  useEffect(() => {
+    if (activeTab === 'google' && googleReviews.length === 0) {
+      const loadGoogleReviews = async () => {
+        try {
+          setLoading(true);
+          const [reviews, details] = await Promise.all([
+            fetchRealGoogleReviews(),
+            fetchPlaceDetails()
+          ]);
+          
+          // Formatear reseñas si vienen de Google Places
+          const formattedReviews = reviews.map(review => 
+            review.author_name ? formatGoogleReview(review) : review
+          );
+          
+          setGoogleReviews(formattedReviews);
+          setPlaceDetails(details);
+          
+          console.log('✅ Testimonials - Datos cargados:', {
+            reviews: formattedReviews.length,
+            placeDetails: details
+          });
+        } catch (error) {
+          console.warn('Error al cargar reseñas en Testimonials:', error);
+          setGoogleReviews([]);
+          setPlaceDetails(null);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      loadGoogleReviews();
+    }
+  }, [activeTab, googleReviews.length]);
 
   // Autoplay functionality
   useEffect(() => {
@@ -149,6 +140,13 @@ const Testimonials = () => {
     });
   };
 
+  // Calcular rating promedio y total de reseñas
+  const averageRating = placeDetails?.rating || (googleReviews.length > 0 
+    ? (googleReviews.reduce((sum, review) => sum + review.rating, 0) / googleReviews.length).toFixed(1)
+    : '4.9');
+
+  const totalReviews = placeDetails?.totalReviews || googleReviews.length || 5;
+
   // Animation variants
   const slideVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -202,7 +200,7 @@ const Testimonials = () => {
           >
             <i className="fab fa-google"></i>
             Google Reviews
-            <span className="google-rating-badge">4.9 ⭐</span>
+            <span className="google-rating-badge">{averageRating} ⭐</span>
           </motion.button>
         </div>
 
@@ -291,11 +289,11 @@ const Testimonials = () => {
             <div className="google-reviews-header">
               <div className="google-rating-summary">
                 <div className="rating-stars-large">
-                  {renderStars(5)}
+                  {renderStars(Math.round(averageRating))}
                 </div>
                 <div className="rating-info-large">
-                  <h3>4.9</h3>
-                  <p>Basado en {googleReviews.length} reseñas verificadas</p>
+                  <h3>{averageRating}</h3>
+                  <p>Basado en {totalReviews} reseñas verificadas</p>
                   <span className="google-verified">
                     <i className="fas fa-check-circle"></i>
                     Verificado por Google
@@ -305,37 +303,49 @@ const Testimonials = () => {
             </div>
 
             <div className="google-reviews-list">
-              {googleReviews.map((review, index) => (
-                <motion.div 
-                  key={review.id}
-                  className="google-review-card"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <div className="google-review-header">
-                    <img 
-                      src={review.profileImage} 
-                      alt={review.author}
-                      className="google-reviewer-avatar"
-                    />
-                    <div className="google-reviewer-info">
-                      <h4>{review.author}</h4>
-                      <div className="google-review-stars">
-                        {renderStars(review.rating)}
+              {loading ? (
+                <div className="loading-reviews">
+                  <i className="fas fa-spinner fa-spin"></i>
+                  <p>Cargando reseñas de Google...</p>
+                </div>
+              ) : googleReviews.length > 0 ? (
+                googleReviews.map((review, index) => (
+                  <motion.div 
+                    key={review.id}
+                    className="google-review-card"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <div className="google-review-header">
+                      <img 
+                        src={review.profileImage} 
+                        alt={review.author}
+                        className="google-reviewer-avatar"
+                      />
+                      <div className="google-reviewer-info">
+                        <h4>{review.author}</h4>
+                        <div className="google-review-stars">
+                          {renderStars(review.rating)}
+                        </div>
+                        <span className="google-review-date">{formatDate(review.date)}</span>
+                        {review.verified && (
+                          <span className="google-verified-badge">
+                            <i className="fas fa-check-circle"></i>
+                            Verificado
+                          </span>
+                        )}
                       </div>
-                      <span className="google-review-date">{formatDate(review.date)}</span>
-                      {review.verified && (
-                        <span className="google-verified-badge">
-                          <i className="fas fa-check-circle"></i>
-                          Verificado
-                        </span>
-                      )}
                     </div>
-                  </div>
-                  <p className="google-review-content">{review.content}</p>
-                </motion.div>
-              ))}
+                    <p className="google-review-content">{review.content}</p>
+                  </motion.div>
+                ))
+              ) : (
+                <div className="no-reviews">
+                  <i className="fas fa-comment-slash"></i>
+                  <p>No hay reseñas disponibles</p>
+                </div>
+              )}
             </div>
 
             <div className="google-reviews-footer">

@@ -7,12 +7,13 @@ exports.getGoogleReviews = functions.https.onCall(async (data, context) => {
     const placeId = 'ChIJN_HNGi9PTg0RnvDP7f4PZyE'; // Tu Place ID
     const apiKey = 'AIzaSyBSvHI9wWQHxJyWPuKirPSG8SWcF4cRy_M'; // Tu API Key
     
-    // URL de la API de Google Places
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${apiKey}`;
+    // URL de la API de Google Places con parámetros para español
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&language=es&key=${apiKey}`;
     
     const response = await axios.get(url);
     
     if (response.data.status === 'OK' && response.data.result.reviews) {
+      console.log(`✅ Reseñas obtenidas: ${response.data.result.reviews.length}`);
       return {
         success: true,
         reviews: response.data.result.reviews
@@ -40,12 +41,13 @@ exports.getPlaceDetails = functions.https.onCall(async (data, context) => {
     const placeId = 'ChIJN_HNGi9PTg0RnvDP7f4PZyE'; // Tu Place ID
     const apiKey = 'AIzaSyBSvHI9wWQHxJyWPuKirPSG8SWcF4cRy_M'; // Tu API Key
     
-    // URL de la API de Google Places
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,formatted_address&key=${apiKey}`;
+    // URL de la API de Google Places con parámetros para español
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,formatted_address&language=es&key=${apiKey}`;
     
     const response = await axios.get(url);
     
     if (response.data.status === 'OK' && response.data.result) {
+      console.log('✅ Detalles del lugar obtenidos');
       return {
         success: true,
         placeDetails: {
