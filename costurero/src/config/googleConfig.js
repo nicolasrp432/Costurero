@@ -11,9 +11,9 @@ export const googleConfig = {
   
   // Ubicación por defecto (Madrid, España) - Cambia por tu ubicación
   DEFAULT_LOCATION: {
-    lat: 40.4168,
-    lng: -3.7038,
-    address: 'Calle Principal, 123, Madrid, España'
+    lat: 43.2255,
+    lng: -2.8952,
+    address: 'Iparraguirre Kalea, Basauri, Bizkaia, España'
   },
   
   // Configuración del mapa
