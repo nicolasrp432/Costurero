@@ -7,13 +7,13 @@ export const googleConfig = {
   PLACES_API_KEY: 'AIzaSyBSvHI9wWQHxJyWPuKirPSG8SWcF4cRy_M',
   
   // ID de tu negocio en Google My Business
-  PLACE_ID: 'TU_PLACE_ID_AQUI',
+  PLACE_ID: 'ChIJN_HNGi9PTg0RnvDP7f4PZyE',
   
   // Ubicación por defecto (Madrid, España) - Cambia por tu ubicación
   DEFAULT_LOCATION: {
     lat: 43.2255,
     lng: -2.8952,
-    address: 'Iparraguirre Kalea, Basauri, Bizkaia, España'
+    address: "Iparragirre Kalea, 1, 2ª a la izquierda, 48970 Basauri, Bizkaia"
   },
   
   // Configuración del mapa
