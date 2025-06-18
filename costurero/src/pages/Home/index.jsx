@@ -4,6 +4,8 @@ import Hero from '../../components/Hero/Hero';
 import Testimonials from '../../components/Testimonials/Testimonials';
 import Button from '../../components/Button/Button';
 import './Home.css';
+import GoogleMap from '../../components/GoogleMap/GoogleMap';
+
 
 const Home = () => {
   useEffect(() => {
@@ -215,6 +217,8 @@ const Home = () => {
 
       {/* Testimonials Section */}
       <Testimonials />
+
+      <GoogleMap />
 
       {/* Call to Action Section */}
       <section className="section cta-section">

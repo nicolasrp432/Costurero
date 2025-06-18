@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Button from '../Button/Button';
 import './Hero.css';
 
+
 // Hero background image will need to be added to your assets folder
 const Hero = () => {
   return (
