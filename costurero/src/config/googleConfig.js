@@ -9,36 +9,59 @@ export const googleConfig = {
   // ID de tu negocio en Google My Business
   PLACE_ID: 'ChIJN_HNGi9PTg0RnvDP7f4PZyE',
   
-  // Ubicación por defecto (Madrid, España) - Cambia por tu ubicación
+  // Ubicación exacta de El Costurero en Basauri
   DEFAULT_LOCATION: {
-    lat: 43.2255,
-    lng: -2.8952,
-    address: "Iparragirre Kalea, 1, 2ª a la izquierda, 48970 Basauri, Bizkaia"
+    lat: 43.23526,
+    lng: -2.89089,
+    address: "Iparragirre Kalea, 1, 2º izquierda, 48970 Basauri, Bizkaia"
   },
   
   // Configuración del mapa
   MAP_CONFIG: {
-    zoom: 15,
-    // Usar el ID de estilos de Google Wizard
+    zoom: 16,
     mapId: 'cde37e1afc807cb6f8745a1e',
-    // Comentamos los estilos personalizados para ver el mapa normal
-    // styles: [
-    //   {
-    //     featureType: 'all',
-    //     elementType: 'geometry',
-    //     stylers: [{ color: '#f5f5f5' }]
-    //   },
-    //   {
-    //     featureType: 'water',
-    //     elementType: 'geometry',
-    //     stylers: [{ color: '#c9c9c9' }]
-    //   },
-    //   {
-    //     featureType: 'poi',
-    //     elementType: 'labels.text.fill',
-    //     stylers: [{ color: '#757575' }]
-    //   }
-    // ]
+    styles: [
+      {
+        featureType: 'all',
+        elementType: 'geometry',
+        stylers: [{ color: '#f5f5f5' }]
+      },
+      {
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [{ color: '#c9c9c9' }]
+      },
+      {
+        featureType: 'poi',
+        elementType: 'labels.text.fill',
+        stylers: [{ color: '#757575' }]
+      },
+      {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [{ color: '#ffffff' }]
+      },
+      {
+        featureType: 'road.arterial',
+        elementType: 'labels.text.fill',
+        stylers: [{ color: '#757575' }]
+      },
+      {
+        featureType: 'road.highway',
+        elementType: 'geometry',
+        stylers: [{ color: '#dadada' }]
+      },
+      {
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [{ color: '#e9e9e9' }]
+      },
+      {
+        featureType: 'transit',
+        elementType: 'geometry',
+        stylers: [{ color: '#f2f2f2' }]
+      }
+    ]
   }
 };
 
