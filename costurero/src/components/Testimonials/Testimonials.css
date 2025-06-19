@@ -96,7 +96,6 @@
 
 .testimonial-content {
   width: 100%;
-  overflow: hidden;
   padding: 2rem 0;
 }
 
@@ -119,8 +118,8 @@
 }
 
 .testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: scale(1.025);
+  border: 2px solid var(--color-gold);
 }
 
 .testimonial-quote {
@@ -258,7 +257,6 @@
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 2rem;
 }
 
 .testimonial-dot {
@@ -427,6 +425,7 @@
   border-radius: 25px;
   font-size: 0.9rem;
   transition: all 0.3s ease;
+  margin-top: 30px;
 }
 
 .google-review-link:hover {
@@ -646,4 +645,46 @@
   font-size: 2rem;
   color: var(--color-gold);
   margin-bottom: 1rem;
+}
+
+/* Nueva ubicación del resumen de rating dentro del slider */
+.rating-summary-inside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--color-gold), #ffd700);
+  border-radius: 12px;
+  color: var(--color-white);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.rating-summary-inside .rating-stars-large {
+  display: flex;
+  gap: 4px;
+}
+
+.rating-summary-inside .fa-star {
+  font-size: 1.3rem;
+  color: var(--color-white);
+}
+
+.rating-summary-inside .rating-info {
+  text-align: left;
+}
+
+.rating-summary-inside .rating-info h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.rating-summary-inside .rating-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
 }

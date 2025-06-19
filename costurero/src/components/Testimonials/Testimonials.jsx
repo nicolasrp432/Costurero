@@ -5,7 +5,7 @@ import testimonialsMock from '../../mocks/testimonialsMock';
 import './Testimonials.css';
 
 // Cambia a true para usar los datos simulados
-const USE_MOCK = false;
+const USE_MOCK = true;
 
 const Testimonials = () => {
   const [current, setCurrent] = useState(0);
@@ -105,16 +105,16 @@ const Testimonials = () => {
 
   // Animation variants
   const slideVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, x: -30 },
     visible: { 
       opacity: 1, 
-      y: 0,
-      transition: { duration: 0.5 } 
+      x: 0,
+      transition: { duration: 0.3 } 
     },
     exit: { 
       opacity: 0, 
-      y: -50,
-      transition: { duration: 0.5 } 
+      x: 30,
+      transition: { duration: 0.3 } 
     }
   };
 
@@ -182,15 +182,6 @@ const Testimonials = () => {
           <p className="section-subtitle">
             Descubre las experiencias de quienes confiaron en nuestro trabajo
           </p>
-          <div className="rating-summary">
-            <div className="rating-stars-large">
-              {renderStars(Math.round(averageRating))}
-            </div>
-            <div className="rating-info">
-              <h3>{averageRating}</h3>
-              <p>Basado en {totalReviews} reseñas verificadas</p>
-            </div>
-          </div>
         </div>
 
         {/* Tab Navigation (opcional, solo si quieres mantenerlo) */}
@@ -216,7 +207,7 @@ const Testimonials = () => {
             <span className="google-rating-badge">{averageRating} ⭐</span>
           </motion.button>
         </div>
-        */}
+        }
 
         {/* Un solo slider para mock o reales */}
         {loading ? (
@@ -232,6 +223,15 @@ const Testimonials = () => {
               initial="hidden"
               animate="visible"
             >
+              <div className="rating-summary-inside">
+                <div className="rating-stars-large">
+                  {renderStars(Math.round(averageRating))}
+                </div>
+                <div className="rating-info">
+                  <h3>{averageRating}</h3>
+                  <p>Basado en {totalReviews} reseñas verificadas</p>
+                </div>
+              </div>
               <div className="testimonial-slider">
                 <div className="testimonial-arrow testimonial-prev" onClick={prevSlide}>
                   <i className="fas fa-chevron-left"></i>
