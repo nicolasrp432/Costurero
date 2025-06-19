@@ -1,6 +1,7 @@
 // Firebase Configuration
 import { initializeApp } from 'firebase/app';
 import { getFunctions, httpsCallable } from 'firebase/functions';
+import { getStorage } from 'firebase/storage';
 
 // Configuración de Firebase - Reemplaza con tus credenciales
 const firebaseConfig = {
@@ -18,6 +19,9 @@ const app = initializeApp(firebaseConfig);
 
 // Obtener funciones de Firebase
 export const functions = getFunctions(app);
+
+// Obtener Storage de Firebase
+export const storage = getStorage(app);
 
 // Función para obtener reseñas de Google Places
 export const getGoogleReviews = httpsCallable(functions, 'getGoogleReviews');

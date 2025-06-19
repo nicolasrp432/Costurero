@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { functions } from '../../config/firebaseConfig';
+import { functions, storage } from '../../config/firebaseConfig';
 import { httpsCallable } from 'firebase/functions';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Button from '../Button/Button';
 import './ContactForm.css';
 
@@ -51,7 +51,6 @@ const ContactForm = ({ type = 'general' }) => {
       message: 'Subiendo archivos...'
     }));
 
-    const storage = getStorage();
     const uploadedUrls = [];
 
     try {
