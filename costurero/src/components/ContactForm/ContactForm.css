@@ -156,3 +156,104 @@
     width: 100%;
   }
 }
+
+/* File Upload Styles */
+.file-info {
+  display: block;
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.attached-files {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.attached-files p {
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+
+.attached-files ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.attached-files li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.attached-files button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.attached-files button:hover {
+  background-color: #c82333;
+}
+
+.attached-files button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Urgency Field Styles */
+select[name="urgency"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 1rem;
+}
+
+select[name="urgency"] option {
+  padding: 0.5rem;
+}
+
+/* File Input Styles */
+input[type="file"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 1rem;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #0056b3;
+}
+
+/* Disabled State Styles */
+input[type="file"]:disabled,
+select[name="urgency"]:disabled {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}

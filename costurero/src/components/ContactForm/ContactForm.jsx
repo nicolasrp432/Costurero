@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { functions } from '../../config/firebaseConfig';
+import { httpsCallable } from 'firebase/functions';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Button from '../Button/Button';
 import './ContactForm.css';
 
 const ContactForm = ({ type = 'general' }) => {
+  const fileInputRef = useRef(null);
+  
   // Form state
   const [formData, setFormData] = useState({
     name: '',
@@ -14,7 +19,9 @@ const ContactForm = ({ type = 'general' }) => {
     serviceType: '',
     preferredDate: '',
     preferredTime: '',
-    orderNumber: ''
+    orderNumber: '',
+    urgency: 'normal',
+    attachments: []
   });
   
   // Form status
@@ -22,7 +29,8 @@ const ContactForm = ({ type = 'general' }) => {
     submitting: false,
     success: false,
     error: false,
-    message: ''
+    message: '',
+    uploadProgress: 0
   });
 
   // Handle input changes
@@ -34,52 +42,169 @@ const ContactForm = ({ type = 'general' }) => {
     });
   };
 
+  // Handle file upload
+  const handleFileUpload = async (files) => {
+    if (!files || files.length === 0) return;
+
+    setFormStatus(prev => ({
+      ...prev,
+      message: 'Subiendo archivos...'
+    }));
+
+    const storage = getStorage();
+    const uploadedUrls = [];
+
+    try {
+      for (let file of files) {
+        // Validar tamaño (máximo 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          setFormStatus(prev => ({
+            ...prev,
+            error: true,
+            message: 'Los archivos no deben superar los 5MB'
+          }));
+          return;
+        }
+
+        // Validar tipo de archivo
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
+        if (!allowedTypes.includes(file.type)) {
+          setFormStatus(prev => ({
+            ...prev,
+            error: true,
+            message: 'Tipo de archivo no permitido. Solo se permiten imágenes (JPG, PNG, GIF) y PDFs'
+          }));
+          return;
+        }
+
+        try {
+          const fileRef = ref(storage, `form-attachments/${Date.now()}-${file.name}`);
+          await uploadBytes(fileRef, file);
+          const url = await getDownloadURL(fileRef);
+          uploadedUrls.push(url);
+        } catch (uploadError) {
+          console.warn('Error uploading file:', uploadError);
+          // Continue with other files even if one fails
+        }
+      }
+
+      setFormData(prev => ({
+        ...prev,
+        attachments: [...prev.attachments, ...uploadedUrls]
+      }));
+
+      setFormStatus(prev => ({
+        ...prev,
+        message: ''
+      }));
+
+    } catch (error) {
+      console.error('Error in file upload:', error);
+      setFormStatus(prev => ({
+        ...prev,
+        error: true,
+        message: 'Error al subir archivos. Puedes continuar sin archivos adjuntos.'
+      }));
+    }
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Set form to submitting state
     setFormStatus({
       submitting: true,
       success: false,
       error: false,
-      message: ''
+      message: 'Enviando formulario...'
     });
 
-    // Simulate form submission with a delay
-    // In a real application, this would be replaced with an actual API call
-    setTimeout(() => {
-      // Simulate successful submission
-      setFormStatus({
-        submitting: false,
-        success: true,
-        error: false,
-        message: 'Mensaje enviado correctamente. Nos pondremos en contacto contigo a la mayor brevedad.'
+    try {
+      // 1. Send to Firebase via Cloud Function (primary)
+      console.log('Sending to Firebase...');
+      const handleContactForm = httpsCallable(functions, 'handleContactForm');
+      const result = await handleContactForm({
+        ...formData,
+        type,
+        submittedAt: new Date().toISOString()
       });
 
-      // Clear form data on success
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-        serviceType: '',
-        preferredDate: '',
-        preferredTime: '',
-        orderNumber: ''
+      console.log('Firebase result:', result);
+
+      // 2. Send to FormSubmit.co in background (non-blocking)
+      console.log('Sending to FormSubmit.co...');
+      const formSubmitEmail = 'nicolasrp432@gmail.com';
+      const formSubmitData = new FormData();
+      
+      // Add all form data to FormSubmit
+      Object.keys(formData).forEach(key => {
+        if (key !== 'attachments') { // Don't send attachments to FormSubmit
+          formSubmitData.append(key, formData[key]);
+        }
+      });
+      
+      // Add form type
+      formSubmitData.append('formType', type);
+      
+      // Send to FormSubmit.co without waiting (fire and forget)
+      fetch(`https://formsubmit.co/${formSubmitEmail}`, {
+        method: 'POST',
+        body: formSubmitData
+      }).then(() => {
+        console.log('FormSubmit.co request sent successfully');
+      }).catch((formSubmitError) => {
+        console.warn('FormSubmit.co failed, but continuing:', formSubmitError);
       });
 
-      // Reset form after 5 seconds
-      setTimeout(() => {
+      // If Firebase was successful
+      if (result.data.success) {
         setFormStatus({
           submitting: false,
-          success: false,
+          success: true,
           error: false,
-          message: ''
+          message: 'Mensaje enviado correctamente. Nos pondremos en contacto contigo a la mayor brevedad.'
         });
-      }, 5000);
-    }, 1500);
+
+        // Clear form data
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+          serviceType: '',
+          preferredDate: '',
+          preferredTime: '',
+          orderNumber: '',
+          urgency: 'normal',
+          attachments: []
+        });
+
+        // Reset file input
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setFormStatus({
+            submitting: false,
+            success: false,
+            error: false,
+            message: '',
+            uploadProgress: 0
+          });
+        }, 5000);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormStatus({
+        submitting: false,
+        success: false,
+        error: true,
+        message: 'Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.'
+      });
+    }
   };
 
   return (
@@ -267,6 +392,67 @@ const ContactForm = ({ type = 'general' }) => {
                 disabled={formStatus.submitting}
               />
             </div>
+          </div>
+        )}
+
+        {/* Urgency Field */}
+        <div className="form-group">
+          <label htmlFor="urgency">Nivel de Urgencia</label>
+          <select
+            id="urgency"
+            name="urgency"
+            value={formData.urgency}
+            onChange={handleChange}
+            disabled={formStatus.submitting}
+          >
+            <option value="normal">Normal</option>
+            <option value="urgent">Urgente</option>
+            <option value="very-urgent">Muy Urgente</option>
+          </select>
+        </div>
+
+        {/* File Upload Field */}
+        <div className="form-group">
+          <label htmlFor="attachments">
+            Adjuntar Archivos (máx. 5MB por archivo)
+          </label>
+          <input
+            type="file"
+            id="attachments"
+            ref={fileInputRef}
+            multiple
+            accept="image/*,application/pdf"
+            onChange={(e) => handleFileUpload(e.target.files)}
+            disabled={formStatus.submitting}
+          />
+          <small className="file-info">
+            Formatos permitidos: JPG, PNG, GIF, PDF
+          </small>
+        </div>
+
+        {/* Display attached files */}
+        {formData.attachments.length > 0 && (
+          <div className="attached-files">
+            <p>Archivos adjuntos:</p>
+            <ul>
+              {formData.attachments.map((url, index) => (
+                <li key={index}>
+                  Archivo {index + 1}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData(prev => ({
+                        ...prev,
+                        attachments: prev.attachments.filter((_, i) => i !== index)
+                      }));
+                    }}
+                    disabled={formStatus.submitting}
+                  >
+                    Eliminar
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
 

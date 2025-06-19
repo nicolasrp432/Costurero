@@ -39,7 +39,7 @@ export const fetchPlaceDetails = async () => {
       console.warn('⚠️ No se pudieron obtener detalles del lugar');
       return {
         rating: 4.9,
-        totalReviews: 5,
+        totalReviews: 7,
         placeName: 'El Costurero',
         address: 'Iparragirre Kalea, 1, 2ª a la izquierda, 48970 Basauri, Bizkaia'
       };
@@ -48,7 +48,7 @@ export const fetchPlaceDetails = async () => {
     console.error('❌ Error al obtener detalles del lugar:', error);
     return {
       rating: 4.9,
-      totalReviews: 5,
+      totalReviews: 7,
       placeName: 'El Costurero',
       address: 'Iparragirre Kalea, 1, 2ª a la izquierda, 48970 Basauri, Bizkaia'
     };
