@@ -26,7 +26,7 @@ const Services = () => {
       id: 'arreglos',
       title: 'Arreglos y Transformaciones',
       description: 'Adaptamos tus prendas favoritas para que luzcan como nuevas y se ajusten perfectamente a ti. Desde simples dobladillos hasta complejas transformaciones, nuestro equipo de profesionales garantiza un acabado impecable en cada trabajo.',
-      image: '/images/services/arreglos.jpg',
+      image: 'src/assets/arreglo_transformacion.png',
       features: [
         'Ajustes de talla en todo tipo de prendas',
         'Arreglos de largos y dobladillos',
@@ -41,7 +41,7 @@ const Services = () => {
       id: 'confeccion',
       title: 'Confección a Medida',
       description: 'Diseñamos y confeccionamos piezas únicas adaptadas a tus gustos, necesidades y medidas exactas. Utilizamos tejidos de alta calidad y técnicas de costura tradicionales para crear prendas que te encajarán a la perfección.',
-      image: '/images/services/confeccion.jpg',
+      image: 'src/assets/confeccion_a_medida.png',
       features: [
         'Trajes y conjuntos de chaqueta personalizados',
         'Camisas y blusas a medida',
@@ -57,7 +57,7 @@ const Services = () => {
       id: 'novia',
       title: 'Novia e Invitada',
       description: 'Creamos vestidos de ensueño para el día más especial. Desde diseños elegantes y clásicos hasta propuestas más modernas y originales, trabajamos mano a mano contigo para materializar el vestido perfecto que siempre has imaginado.',
-      image: '/images/services/novia.jpg',
+      image: 'src/assets/novivas.png',
       features: [
         'Vestidos de novia a medida',
         'Arreglos y modificaciones de vestidos existentes',
@@ -119,7 +119,7 @@ const Services = () => {
       id: 'hogar',
       title: 'Textil Hogar',
       description: 'Transformamos tu hogar con textiles personalizados de la más alta calidad. Desde cortinas elegantes hasta cojines decorativos, creamos piezas que se adaptan perfectamente a tu espacio y estilo de decoración.',
-      image: '/images/services/hogar.jpg',
+      image: 'src/assets/textilhogar.png',
       features: [
         'Cortinas a medida para cualquier ventana',
         'Cojines decorativos personalizados',

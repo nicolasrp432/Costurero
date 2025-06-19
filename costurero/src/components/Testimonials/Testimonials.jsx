@@ -5,7 +5,7 @@ import testimonialsMock from '../../mocks/testimonialsMock';
 import './Testimonials.css';
 
 // Cambia a true para usar los datos simulados
-const USE_MOCK = true;
+const USE_MOCK = false;
 
 const Testimonials = () => {
   const [current, setCurrent] = useState(0);
