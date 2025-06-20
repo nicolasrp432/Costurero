@@ -72,7 +72,7 @@ const Services = () => {
       id: 'abrigos',
       title: 'Abrigos de Piel',
       description: 'Especialistas en la restauración, transformación y cuidado de prendas de piel. Damos nueva vida a abrigos antiguos adaptándolos a las tendencias actuales, manteniendo la calidad y el valor de la prenda original.',
-      image: '/images/services/abrigos.jpg',
+      image: 'src/assets/abrigodecuero.png',
       features: [
         'Restauración de abrigos de piel antiguos',
         'Transformación y modernización de diseños',
@@ -88,7 +88,7 @@ const Services = () => {
       id: 'uniformes',
       title: 'Uniformes y Batas',
       description: 'Confeccionamos uniformes corporativos y escolares a medida, adaptados a las necesidades específicas de cada cliente. Ofrecemos servicios para empresas, colegios y profesionales que buscan transmitir una imagen coherente y profesional.',
-      image: '/images/services/uniformes.jpg',
+      image: 'src/assets/uniforme.png',
       features: [
         'Uniformes corporativos personalizados',
         'Batas para colegios, laboratorios y sanitarios',
@@ -103,7 +103,7 @@ const Services = () => {
       id: 'fiesta',
       title: 'Trajes de Fiesta',
       description: 'Creamos trajes de fiesta exclusivos para eventos especiales, diseñados según tus preferencias y confeccionados con acabados de alta costura. Nuestro objetivo es que luzcas espectacular y única en cada ocasión.',
-      image: '/images/services/fiesta.jpg',
+      image: 'src/assets/fiesta.png',
       features: [
         'Vestidos de fiesta a medida',
         'Trajes de ceremonia para hombre',
@@ -134,7 +134,7 @@ const Services = () => {
       id: 'clases',
       title: 'Clases de Patronaje',
       description: 'Compartimos nuestra experiencia y conocimientos a través de clases de patronaje y costura para todos los niveles. Aprende técnicas profesionales en un ambiente acogedor donde podrás desarrollar tu creatividad y habilidades.',
-      image: '/images/services/clases.jpg',
+      image: 'src/assets/clases.png',
       features: [
         'Clases para principiantes y niveles avanzados',
         'Grupos reducidos con atención personalizada',
