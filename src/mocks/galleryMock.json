@@ -4,83 +4,83 @@
     "category": "arreglos",
     "title": "Transformación de Vestido",
     "description": "Transformación completa de un vestido vintage adaptándolo a un estilo más moderno.",
-    "image": "/images/gallery/arreglos-1.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 2,
     "category": "confeccion",
     "title": "Traje a Medida",
     "description": "Traje de chaqueta confeccionado a medida en lana 100% virgen.",
-    "image": "/images/gallery/confeccion-1.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 3,
     "category": "novia",
     "title": "Vestido de Novia",
     "description": "Diseño exclusivo de vestido de novia con bordados artesanales y pedrería.",
-    "image": "/images/gallery/novia-1.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 4,
     "category": "abrigos",
     "title": "Restauración de Abrigo",
     "description": "Restauración y modernización de un abrigo de piel vintage.",
-    "image": "/images/gallery/abrigos-1.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 5,
     "category": "uniformes",
     "title": "Uniformes Corporativos",
     "description": "Conjunto de uniformes corporativos para restaurante de alta cocina.",
-    "image": "/images/gallery/uniformes-1.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 6,
     "category": "fiesta",
     "title": "Vestido de Gala",
     "description": "Diseño y confección de vestido de gala en seda natural con apliques de pedrería.",
-    "image": "/images/gallery/fiesta-1.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 7,
     "category": "hogar",
     "title": "Cortinas a Medida",
     "description": "Cortinas de lino natural confeccionadas a medida para salón.",
-    "image": "/images/gallery/hogar-1.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 8,
     "category": "arreglos",
     "title": "Ajuste de Traje",
     "description": "Ajuste completo de un traje de hombre heredado.",
-    "image": "/images/gallery/arreglos-2.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 9,
     "category": "confeccion",
     "title": "Camisa a Medida",
     "description": "Camisa de algodón egipcio confeccionada a medida con puños especiales.",
-    "image": "/images/gallery/confeccion-2.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 10,
     "category": "novia",
     "title": "Tocado de Novia",
     "description": "Tocado artesanal para novia con flores de seda y cristales.",
-    "image": "/images/gallery/novia-2.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 11,
     "category": "fiesta",
     "title": "Vestido de Madrina",
     "description": "Conjunto de madrina en seda salvaje con chaqueta a juego.",
-    "image": "/images/gallery/fiesta-2.jpg"
+    "image": "src/assets/novivas.png"
   },
   {
     "id": 12,
     "category": "hogar",
     "title": "Cojines Decorativos",
     "description": "Colección de cojines decorativos en diferentes texturas y acabados.",
-    "image": "/images/gallery/hogar-2.jpg"
+    "image": "src/assets/novivas.png"
   }
 ] 

@@ -1,7 +1,7 @@
 import galleryMock from '../mocks/galleryMock.json';
 
 const ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
-const USE_MOCK_GALLERY = import.meta.env.VITE_USE_MOCK_GALLERY === 'false';
+const USE_MOCK_GALLERY = import.meta.env.VITE_USE_MOCK_GALLERY === 'true';
 
 export async function fetchGalleryImages(category) {
   if (USE_MOCK_GALLERY) {
