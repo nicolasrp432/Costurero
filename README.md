@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Costurero - Tienda de Costura Online
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Repositorio en GitHub](https://github.com/nicolasrp432/Costurero)
 
-## Available Scripts
+## Descripción
+Costurero es una tienda de costura online moderna, diseñada para ofrecer servicios de confección, arreglos, vestidos de novia, uniformes y más. El proyecto incluye una galería dinámica de imágenes, formulario de contacto avanzado, integración con APIs públicas y un sistema de mock para facilitar el desarrollo y las pruebas.
 
-In the project directory, you can run:
+## Características principales
+- Galería de imágenes dinámica por categorías (API Unsplash o datos mock)
+- Filtro de categorías y modal de detalles para cada imagen
+- Formulario de contacto avanzado con validaciones, subida de archivos y doble destino (Firebase y FormSubmit)
+- Sistema de variables de entorno para claves y configuración
+- Sistema de mock para desarrollo sin depender de APIs externas
+- Estilos modernos y responsivos
 
-### `npm start`
+## Tecnologías utilizadas
+- React
+- Vite
+- Firebase (Cloud Functions, Storage)
+- Unsplash API
+- Vitest + React Testing Library (tests unitarios)
+- CSS personalizado
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Instalación
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/nicolasrp432/Costurero.git
+   cd Costurero
+   ```
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+3. Configura las variables de entorno:
+   - Crea un archivo `.env` en la raíz con tus claves y configuración:
+     ```env
+     VITE_UNSPLASH_ACCESS_KEY=tu_clave_unsplash
+     VITE_USE_MOCK_GALLERY=false
+     # Otras variables necesarias para Firebase, etc.
+     ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Uso
+- Inicia el servidor de desarrollo:
+  ```bash
+  npm run dev
+  ```
+- Accede a la app en [http://localhost:5173](http://localhost:5173) (o el puerto que indique Vite).
 
-### `npm test`
+## Testing
+- Ejecuta los tests unitarios con:
+  ```bash
+  npm run test
+  ```
+- Los tests están ubicados en `src/tests/` y usan Vitest + React Testing Library.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Despliegue
+- Genera la versión de producción con:
+  ```bash
+  npm run build
+  ```
+- El contenido listo para producción estará en la carpeta `dist/`.
 
-### `npm run build`
+## Contribuir
+1. Haz un fork del repositorio
+2. Crea una rama para tu feature o fix: `git checkout -b mi-feature`
+3. Realiza tus cambios y haz commit: `git commit -m "Descripción del cambio"`
+4. Haz push a tu rama: `git push origin mi-feature`
+5. Abre un Pull Request en GitHub
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Licencia
+Este proyecto está bajo la licencia MIT.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Desarrollado por [nicolasrp432](https://github.com/nicolasrp432) y colaboradores.**

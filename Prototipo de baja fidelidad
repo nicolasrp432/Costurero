@@ -1,0 +1,61 @@
+Prototipo de Baja Fidelidad
+Página de Inicio (Home)
+
+┌─────────────────────────────────────────────┐
+│ [ HEADER: Logo + Navegación ]               │
+├─────────────────────────────────────────────┤
+│ [ HERO SECTION ]                            │
+│   - Título de bienvenida                    │
+│   - Imagen destacada de costura             │
+│   - Botón CTA "Ver Productos"               │
+├─────────────────────────────────────────────┤
+│ [ SECCIÓN DESTACADOS ]                      │
+│   - "Productos más populares"               │
+│   - Grid 4 servicios                        │
+│ [ SECCIÓN TESTIMONIOS ]                     │
+│   - "Reseñas de Google"                     │
+│   - Mapa de como llegar                     │
+├─────────────────────────────────────────────┤
+│ [ FOOTER: Copyright + Redes Sociales ]      │
+└─────────────────────────────────────────────┘
+
+Página de Servicios
+
+┌─────────────────────────────────────────────┐
+│ [ HEADER: Logo + Navegación ]               │
+├─────────────────────────────────────────────┤
+│ [ TÍTULO: "Nuestros Servicios" ]            │
+├─────────────────────────────────────────────┤
+│ [ GRID DE SERVICIOS ]                       │
+│ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐     │
+│ │ Img   │ │ Img   │ │ Img   │ │ Img   │     │
+│ │ Título│ │ Título│ │ Título│ │ Título│     │
+│ │ Precio│ │ Precio│ │ Precio│ │ Precio│     │
+│ └───────┘ └───────┘ └───────┘ └───────┘     │
+│ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐     │
+│ │ Img   │ │ Img   │ │ Img   │ │ Img   │     │ 
+│ └───────┘ └───────┘ └───────┘ └───────┘     │
+├─────────────────────────────────────────────┤
+│ [ FOOTER: Copyright + Redes Sociales ]      │
+└─────────────────────────────────────────────┘
+
+Página de Contacto
+
+┌─────────────────────────────────────────────┐
+│ [ HEADER: Logo + Navegación ]               │
+├─────────────────────────────────────────────┤
+│ [ TÍTULO: "Contacta con Nosotros" ]         │
+├─────────────────────────────────────────────┤
+│ [ FORMULARIO DE CONTACTO ]                  │
+│   - Campo Nombre                            │
+│   - Campo Email                             │
+│   - Campo Mensaje                           │
+│   - Botón Enviar                            │
+├─────────────────────────────────────────────┤
+│ [ INFORMACIÓN ADICIONAL ]                   │
+│   - Horarios de atención                    │
+│   - Métodos de contacto                     │
+├─────────────────────────────────────────────┤
+│ [ FOOTER: Copyright + Redes Sociales ]      │
+└─────────────────────────────────────────────┘
+
