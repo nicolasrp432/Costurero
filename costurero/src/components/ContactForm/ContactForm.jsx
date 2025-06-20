@@ -6,6 +6,12 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Button from '../Button/Button';
 import './ContactForm.css';
 
+// Switch para controlar los destinos del formulario
+const FORM_DESTINATIONS = {
+  firebase: false,      // Enviar a Cloud Function (base de datos y correo)
+  formsubmit: true     // Enviar a FormSubmit.co
+};
+
 const ContactForm = ({ type = 'general' }) => {
   const fileInputRef = useRef(null);
   
@@ -110,7 +116,6 @@ const ContactForm = ({ type = 'general' }) => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     setFormStatus({
       submitting: true,
       success: false,
@@ -119,52 +124,56 @@ const ContactForm = ({ type = 'general' }) => {
     });
 
     try {
-      // 1. Send to Firebase via Cloud Function (primary)
-      console.log('Sending to Firebase...');
-      const handleContactForm = httpsCallable(functions, 'handleContactForm');
-      const result = await handleContactForm({
-        ...formData,
-        type,
-        submittedAt: new Date().toISOString()
-      });
-
-      console.log('Firebase result:', result);
-
-      // 2. Send to FormSubmit.co in background (non-blocking)
-      console.log('Sending to FormSubmit.co...');
-      const formSubmitEmail = 'nicolasrp432@gmail.com';
-      const formSubmitData = new FormData();
-      
-      // Add all form data to FormSubmit
-      Object.keys(formData).forEach(key => {
-        if (key !== 'attachments') { // Don't send attachments to FormSubmit
-          formSubmitData.append(key, formData[key]);
+      let firebaseResult = { data: { success: false } };
+      // 1. Enviar a Firebase (Cloud Function)
+      if (FORM_DESTINATIONS.firebase) {
+        try {
+          console.log('Sending to Firebase...');
+          const handleContactForm = httpsCallable(functions, 'handleContactForm');
+          firebaseResult = await handleContactForm({
+            ...formData,
+            type,
+            submittedAt: new Date().toISOString()
+          });
+          console.log('Firebase result:', firebaseResult);
+        } catch (firebaseError) {
+          console.warn('Error enviando a Firebase:', firebaseError);
         }
-      });
-      
-      // Add form type
-      formSubmitData.append('formType', type);
-      
-      // Send to FormSubmit.co without waiting (fire and forget)
-      fetch(`https://formsubmit.co/${formSubmitEmail}`, {
-        method: 'POST',
-        body: formSubmitData
-      }).then(() => {
-        console.log('FormSubmit.co request sent successfully');
-      }).catch((formSubmitError) => {
-        console.warn('FormSubmit.co failed, but continuing:', formSubmitError);
-      });
+      }
 
-      // If Firebase was successful
-      if (result.data.success) {
+      // 2. Enviar a FormSubmit.co (no bloqueante)
+      if (FORM_DESTINATIONS.formsubmit) {
+        try {
+          console.log('Sending to FormSubmit.co...');
+          const formSubmitEmail = 'nicolasrp432@gmail.com';
+          const formSubmitData = new FormData();
+          Object.keys(formData).forEach(key => {
+            if (key !== 'attachments') {
+              formSubmitData.append(key, formData[key]);
+            }
+          });
+          formSubmitData.append('formType', type);
+          fetch(`https://formsubmit.co/${formSubmitEmail}`, {
+            method: 'POST',
+            body: formSubmitData
+          }).then(() => {
+            console.log('FormSubmit.co request sent successfully');
+          }).catch((formSubmitError) => {
+            console.warn('FormSubmit.co failed, but continuing:', formSubmitError);
+          });
+        } catch (formSubmitError) {
+          console.warn('Error enviando a FormSubmit.co:', formSubmitError);
+        }
+      }
+
+      // Si Firebase fue exitoso (o si solo se usa FormSubmit)
+      if ((FORM_DESTINATIONS.firebase && firebaseResult.data.success) || (!FORM_DESTINATIONS.firebase && FORM_DESTINATIONS.formsubmit)) {
         setFormStatus({
           submitting: false,
           success: true,
           error: false,
           message: 'Mensaje enviado correctamente. Nos pondremos en contacto contigo a la mayor brevedad.'
         });
-
-        // Clear form data
         setFormData({
           name: '',
           email: '',
@@ -178,13 +187,9 @@ const ContactForm = ({ type = 'general' }) => {
           urgency: 'normal',
           attachments: []
         });
-
-        // Reset file input
         if (fileInputRef.current) {
           fileInputRef.current.value = '';
         }
-
-        // Reset form after 5 seconds
         setTimeout(() => {
           setFormStatus({
             submitting: false,

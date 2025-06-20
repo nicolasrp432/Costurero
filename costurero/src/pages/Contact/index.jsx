@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import Button from '../../components/Button/Button';
 import './Contact.css';
+import GoogleMap from '../../components/GoogleMap/GoogleMap';
 
 const Contact = () => {
   const location = useLocation();
@@ -158,26 +159,8 @@ const Contact = () => {
       </section>
 
       {/* Map Section */}
-      <section className="map-section">
-        <div className="map-container">
-          {/* This would be replaced with an actual Google Maps embed */}
-          <div className="map-placeholder">
-            <div className="map-overlay"></div>
-            <div className="map-content">
-              <h3>¡Encuéntranos aquí!</h3>
-              <p>Puedes visitarnos en nuestra ubicación física o contactarnos a través de nuestros canales digitales.</p>
-              <a 
-                href="https://maps.google.com/?q=Calle+Ejemplo+123+Madrid+España" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="map-btn"
-              >
-                Abrir en Google Maps
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      
+      <GoogleMap />
 
       {/* Contact Form Section */}
       <section className="contact-form-section">

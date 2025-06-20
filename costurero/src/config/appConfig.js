@@ -1,7 +1,7 @@
 // Configuración de la aplicación
 export const config = {
   // Cambiar a false para usar la API real
-  useMockData: import.meta.env.VITE_USE_MOCK_DATA === 'true',
+  useMockData: import.meta.env.VITE_USE_MOCK_DATA === 'false',
   
   // Configuración de la API
   api: {
