@@ -9,7 +9,7 @@ import './ContactForm.css';
 // Switch para controlar los destinos del formulario
 const FORM_DESTINATIONS = {
   firebase: false,      // Enviar a Cloud Function (base de datos y correo)
-  formsubmit: true     // Enviar a FormSubmit.co
+  formsubmit: true,     // Enviar a FormSubmit.co
 };
 
 const ContactForm = ({ type = 'general' }) => {
@@ -113,6 +113,66 @@ const ContactForm = ({ type = 'general' }) => {
     }
   };
 
+  // SOLUCIÓN CORS: Función para enviar a FormSubmit usando form tradicional
+  const sendToFormSubmit = (formDataToSend) => {
+    try {
+      // Crear un formulario oculto
+      const form = document.createElement('form');
+      form.action = 'https://formsubmit.co/nicolasrp432@gmail.com';
+      form.method = 'POST';
+      form.style.display = 'none';
+      form.target = '_blank'; // Abrir en nueva ventana para evitar redirección
+
+      // Agregar campos al formulario
+      Object.keys(formDataToSend).forEach(key => {
+        if (key !== 'attachments' && formDataToSend[key]) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = formDataToSend[key];
+          form.appendChild(input);
+        }
+      });
+
+      // Agregar tipo de formulario
+      const typeInput = document.createElement('input');
+      typeInput.type = 'hidden';
+      typeInput.name = 'formType';
+      typeInput.value = type;
+      form.appendChild(typeInput);
+
+      // Agregar configuraciones de FormSubmit
+      const nextInput = document.createElement('input');
+      nextInput.type = 'hidden';
+      nextInput.name = '_next';
+      nextInput.value = window.location.origin + '/mensaje-enviado';
+      form.appendChild(nextInput);
+
+      const subjectInput = document.createElement('input');
+      subjectInput.type = 'hidden';
+      subjectInput.name = '_subject';
+      subjectInput.value = `Nuevo mensaje de ${formDataToSend.name} - ${formDataToSend.subject}`;
+      form.appendChild(subjectInput);
+
+      // Agregar al DOM y enviar
+      document.body.appendChild(form);
+      form.submit();
+      
+      // Limpiar después de un momento
+      setTimeout(() => {
+        if (document.body.contains(form)) {
+          document.body.removeChild(form);
+        }
+      }, 1000);
+
+      console.log('FormSubmit.co form submitted successfully');
+      return true;
+    } catch (error) {
+      console.warn('Error sending to FormSubmit.co:', error);
+      return false;
+    }
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -125,6 +185,7 @@ const ContactForm = ({ type = 'general' }) => {
 
     try {
       let firebaseResult = { data: { success: false } };
+      
       // 1. Enviar a Firebase (Cloud Function)
       if (FORM_DESTINATIONS.firebase) {
         try {
@@ -141,39 +202,26 @@ const ContactForm = ({ type = 'general' }) => {
         }
       }
 
-      // 2. Enviar a FormSubmit.co (no bloqueante)
+      // 2. Enviar a FormSubmit.co (SOLUCIÓN CORS)
+      let formSubmitSuccess = false;
       if (FORM_DESTINATIONS.formsubmit) {
-        try {
-          console.log('Sending to FormSubmit.co...');
-          const formSubmitEmail = 'nicolasrp432@gmail.com';
-          const formSubmitData = new FormData();
-          Object.keys(formData).forEach(key => {
-            if (key !== 'attachments') {
-              formSubmitData.append(key, formData[key]);
-            }
-          });
-          formSubmitData.append('formType', type);
-          fetch(`https://formsubmit.co/${formSubmitEmail}`, {
-            method: 'POST',
-            body: formSubmitData
-          }).then(() => {
-            console.log('FormSubmit.co request sent successfully');
-          }).catch((formSubmitError) => {
-            console.warn('FormSubmit.co failed, but continuing:', formSubmitError);
-          });
-        } catch (formSubmitError) {
-          console.warn('Error enviando a FormSubmit.co:', formSubmitError);
-        }
+        console.log('Sending to FormSubmit.co...');
+        formSubmitSuccess = sendToFormSubmit(formData);
       }
 
-      // Si Firebase fue exitoso (o si solo se usa FormSubmit)
-      if ((FORM_DESTINATIONS.firebase && firebaseResult.data.success) || (!FORM_DESTINATIONS.firebase && FORM_DESTINATIONS.formsubmit)) {
+      // Determinar éxito basado en las opciones habilitadas
+      const firebaseSuccess = FORM_DESTINATIONS.firebase && firebaseResult.data.success;
+      const shouldSucceed = firebaseSuccess || (FORM_DESTINATIONS.formsubmit && formSubmitSuccess) || (!FORM_DESTINATIONS.firebase && !FORM_DESTINATIONS.formsubmit);
+
+      if (shouldSucceed) {
         setFormStatus({
           submitting: false,
           success: true,
           error: false,
           message: 'Mensaje enviado correctamente. Nos pondremos en contacto contigo a la mayor brevedad.'
         });
+        
+        // Limpiar formulario
         setFormData({
           name: '',
           email: '',
@@ -187,9 +235,12 @@ const ContactForm = ({ type = 'general' }) => {
           urgency: 'normal',
           attachments: []
         });
+        
         if (fileInputRef.current) {
           fileInputRef.current.value = '';
         }
+        
+        // Limpiar mensaje después de 5 segundos
         setTimeout(() => {
           setFormStatus({
             submitting: false,
@@ -199,6 +250,8 @@ const ContactForm = ({ type = 'general' }) => {
             uploadProgress: 0
           });
         }, 5000);
+      } else {
+        throw new Error('No se pudo enviar el formulario');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -370,7 +423,7 @@ const ContactForm = ({ type = 'general' }) => {
                   type="text"
                   id="specialRequirements"
                   name="specialRequirements"
-                  value={formData.specialRequirements}
+                  value={formData.specialRequirements || ''}
                   onChange={handleChange}
                   placeholder="¿Alguna necesidad especial?"
                   disabled={formStatus.submitting}

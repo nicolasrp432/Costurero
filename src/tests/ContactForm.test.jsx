@@ -1,7 +1,6 @@
-import React from 'react';
-import '@testing-library/jest-dom';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import ContactForm from '../components/ContactForm/ContactForm';
 
 describe('ContactForm', () => {
@@ -17,12 +16,14 @@ describe('ContactForm', () => {
     // Acepta la política de privacidad
     fireEvent.click(screen.getByLabelText(/política de privacidad/i));
 
-    // Envía el formulario
-    fireEvent.click(screen.getByRole('button', { name: /enviar/i }));
+    // Envía el formulario (ajustar el texto del botón según el formulario)
+    // El botón puede decir 'Enviar Mensaje', 'Solicitar Cita', etc.
+    const submitButton = screen.getByRole('button', { name: /enviar mensaje|enviar|solicitar cita|consultar estado/i });
+    fireEvent.click(submitButton);
 
     // Espera a que aparezca el mensaje de éxito
     await waitFor(() =>
-      expect(screen.getByText(/mensaje enviado correctamente/i)).toBeInTheDocument()
+      expect(screen.getByText(/Mensaje enviado correctamente. Nos pondremos en contacto contigo a la mayor brevedad./i)).toBeInTheDocument()
     );
   });
 });

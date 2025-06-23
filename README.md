@@ -67,9 +67,5 @@ Costurero es una tienda de costura online moderna, diseñada para ofrecer servic
 4. Haz push a tu rama: `git push origin mi-feature`
 5. Abre un Pull Request en GitHub
 
-## Licencia
-Este proyecto está bajo la licencia MIT.
-
----
 
 **Desarrollado por [nicolasrp432](https://github.com/nicolasrp432) y colaboradores.**
