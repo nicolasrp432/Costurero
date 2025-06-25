@@ -88,6 +88,11 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink to="/clases" className={({ isActive }) => isActive ? 'active' : ''}>
+                Clases
+              </NavLink>
+            </li>
+            <li>
               <NavLink to="/contacto" className="contact-btn">
                 Contacto
               </NavLink>
@@ -165,6 +170,15 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.65 }}
                 >
+                  <NavLink to="/clases" onClick={closeMenu}>
+                    Clases
+                  </NavLink>
+                </motion.li>
+                <motion.li
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                >
                   <NavLink to="/calendario" onClick={closeMenu}>
                     Calendario
                   </NavLink>
@@ -172,7 +186,7 @@ const Navbar = () => {
                 <motion.li
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7 }}
+                  transition={{ delay: 0.75 }}
                 >
                   <NavLink to="/contacto" onClick={closeMenu} className="mobile-contact-btn">
                     Contacto
