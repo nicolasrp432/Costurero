@@ -6,7 +6,7 @@ import './Testimonials.css';
 import useGoogleReviewsStore from '../../services/googleReviewsStore';
 
 // Cambia a true para usar los datos simulados
-const USE_MOCK = true;
+const USE_MOCK = process.env.NODE_ENV !== 'production';
 
 const Testimonials = () => {
   const [current, setCurrent] = useState(0);
@@ -51,7 +51,7 @@ const Testimonials = () => {
 
       loadGoogleReviews();
     }
-  }, [USE_MOCK, googleReviews.length, setGoogleReviews, setPlaceDetails]);
+  }, [googleReviews.length]);
 
   // Autoplay functionality
   useEffect(() => {
