@@ -178,6 +178,20 @@ const Testimonials = () => {
     </motion.div>
   );
 
+  // Precarga de imágenes de testimonios
+  useEffect(() => {
+    testimonials.forEach(testimonial => {
+      if (testimonial.image) {
+        const img = new window.Image();
+        img.src = testimonial.image;
+      }
+      if (testimonial.profileImage) {
+        const img = new window.Image();
+        img.src = testimonial.profileImage;
+      }
+    });
+  }, [testimonials]);
+
   return (
     <section className="testimonials">
       <div className="container">

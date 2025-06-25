@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchGalleryImages } from '../../services/galleryService';
+import useGalleryStore from '../../services/galleryStore';
 import './Gallery.css';
 
 const categories = [
@@ -14,8 +15,10 @@ const categories = [
 ];
 
 function Gallery({ initialCategory = 'all' }) {
-  const [activeCategory, setActiveCategory] = useState(initialCategory);
-  const [items, setItems] = useState([]);
+  const items = useGalleryStore(state => state.items);
+  const setItems = useGalleryStore(state => state.setItems);
+  const activeCategory = useGalleryStore(state => state.activeCategory);
+  const setActiveCategory = useGalleryStore(state => state.setActiveCategory);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -23,11 +26,15 @@ function Gallery({ initialCategory = 'all' }) {
   useEffect(() => {
     setLoading(true);
     setError(null);
+    if (items.length > 0 && activeCategory === initialCategory) {
+      setLoading(false);
+      return;
+    }
     fetchGalleryImages(activeCategory)
       .then(setItems)
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, [activeCategory]);
+  }, [activeCategory, items.length, initialCategory, setItems]);
 
   // Modal handlers
   const openModal = (item) => {
@@ -64,7 +71,7 @@ function Gallery({ initialCategory = 'all' }) {
               <img 
                 src={item.image} 
                 alt={item.title} 
-                onError={e => { e.target.onerror = null; e.target.src = '/images/imagen.jpg'; }}
+                onError={e => { e.target.onerror = null; e.target.src = '/images/novivas.png'; }}
               />
               <div className="gallery-item-overlay">
                 <span>Ver detalles</span>
@@ -88,7 +95,7 @@ function Gallery({ initialCategory = 'all' }) {
               <img 
                 src={selectedItem.image} 
                 alt={selectedItem.title}
-                onError={e => { e.target.onerror = null; e.target.src = '/images/imagen.jpg'; }}
+                onError={e => { e.target.onerror = null; e.target.src = '/images/novivas.png'; }}
               />
             </div>
             <div className="modal-details">

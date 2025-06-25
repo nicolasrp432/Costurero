@@ -1,14 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ServiceSection from '../../components/ServiceSection/ServiceSection';
 import Testimonials from '../../components/Testimonials/Testimonials';
 import Button from '../../components/Button/Button';
 import './Services.css';
+import useServicesStore from '../../services/servicesStore';
 
 const Services = () => {
+  const services = useServicesStore(state => state.services);
+  const setServices = useServicesStore(state => state.setServices);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (services.length === 0) {
+      setServices(servicesData);
+    }
+  }, [services, setServices]);
 
   // Animation variants
   const fadeInUp = {
@@ -21,7 +31,7 @@ const Services = () => {
   };
 
   // Services data
-  const services = [
+  const servicesData = [
     {
       id: 'arreglos',
       title: 'Arreglos y Transformaciones',
