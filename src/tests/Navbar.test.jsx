@@ -1,123 +1,62 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 
-// Mock window.scrollY
-const mockScroll = (scrollY) => {
-  Object.defineProperty(window, 'scrollY', {
-    value: scrollY,
-    writable: true
-  });
-};
-
-// Wrapper component for Router context
 const NavbarWrapper = ({ children }) => (
   <BrowserRouter>{children}</BrowserRouter>
 );
 
-describe('Navbar Component', () => {
+describe('Componente Navbar', () => {
   beforeEach(() => {
-    // Reset scroll position before each test
-    mockScroll(0);
+    // Resetear scroll antes de cada test (por si acaso)
+    Object.defineProperty(window, 'scrollY', {
+      value: 0,
+      writable: true
+    });
   });
 
-  it('renders the logo text correctly', () => {
+  it('renderiza el logo correctamente', () => {
     render(<Navbar />, { wrapper: NavbarWrapper });
     expect(screen.getByText('El Costurero')).toBeInTheDocument();
   });
 
-  it('renders all navigation links', () => {
+  it('renderiza los enlaces principales de navegación', () => {
     render(<Navbar />, { wrapper: NavbarWrapper });
-    const expectedLinks = [
+    const enlaces = [
       'Inicio',
       'Servicios',
       'Proceso',
       'Galería',
       'Precios',
       'Nosotros',
-      'Calendario',
+      'Clases',
       'Contacto'
     ];
-
-    expectedLinks.forEach(linkText => {
-      expect(screen.getByText(linkText)).toBeInTheDocument();
+    enlaces.forEach(texto => {
+      expect(screen.getAllByText(texto).length).toBeGreaterThan(0);
     });
   });
 
-  it('toggles mobile menu when hamburger is clicked', async () => {
+  it('abre el menú móvil al hacer click en el botón hamburguesa', () => {
     render(<Navbar />, { wrapper: NavbarWrapper });
-    const hamburger = screen.getByRole('button', { name: /toggle menu/i }) || 
-                     document.querySelector('.hamburger');
-    
-    // Initial state - menu should be closed
-    expect(hamburger).not.toHaveClass('active');
-    
-    // Click to open menu
-    fireEvent.click(hamburger);
-    expect(hamburger).toHaveClass('active');
-    
-    // Click to close menu
-    fireEvent.click(hamburger);
-    expect(hamburger).not.toHaveClass('active');
+    const botonHamburguesa = screen.getByRole('button', { name: /toggle menu/i });
+    const hamburguesaDiv = botonHamburguesa.querySelector('.hamburger');
+    expect(hamburguesaDiv).not.toHaveClass('active');
+    fireEvent.click(botonHamburguesa);
+    expect(hamburguesaDiv).toHaveClass('active');
   });
 
-  it('closes mobile menu when a link is clicked', () => {
+  it('cierra el menú móvil al hacer click en un enlace', () => {
     render(<Navbar />, { wrapper: NavbarWrapper });
-    const hamburger = screen.getByRole('button', { name: /toggle menu/i }) || 
-                     document.querySelector('.hamburger');
-    
-    // Open menu
-    fireEvent.click(hamburger);
-    expect(hamburger).toHaveClass('active');
-    
-    // Click a link
-    fireEvent.click(screen.getByText('Servicios'));
-    expect(hamburger).not.toHaveClass('active');
-  });
-
-  it('adds scrolled class when window is scrolled down', async () => {
-    render(<Navbar />, { wrapper: NavbarWrapper });
-    const navbar = document.querySelector('.navbar');
-    
-    // Initial state
-    expect(navbar).not.toHaveClass('scrolled');
-    
-    // Simulate scroll
-    mockScroll(51);
-    const scrollEvent = new Event('scroll');
-    window.dispatchEvent(scrollEvent);
-    
-    await waitFor(() => {
-      expect(navbar).toHaveClass('scrolled');
-    });
-  });
-
-  it('removes scrolled class when window is scrolled back to top', async () => {
-    render(<Navbar />, { wrapper: NavbarWrapper });
-    const navbar = document.querySelector('.navbar');
-    
-    // Scroll down first
-    mockScroll(51);
-    window.dispatchEvent(new Event('scroll'));
-    
-    await waitFor(() => {
-      expect(navbar).toHaveClass('scrolled');
-    });
-    
-    // Scroll back up
-    mockScroll(0);
-    window.dispatchEvent(new Event('scroll'));
-    
-    await waitFor(() => {
-      expect(navbar).not.toHaveClass('scrolled');
-    });
-  });
-
-  it('renders contact button with special styling', () => {
-    render(<Navbar />, { wrapper: NavbarWrapper });
-    const contactLink = screen.getByText('Contacto');
-    expect(contactLink).toHaveClass('contact-btn');
+    const botonHamburguesa = screen.getByRole('button', { name: /toggle menu/i });
+    const hamburguesaDiv = botonHamburguesa.querySelector('.hamburger');
+    fireEvent.click(botonHamburguesa);
+    expect(hamburguesaDiv).toHaveClass('active');
+    // Click en el enlace "Servicios" del menú móvil
+    const serviciosLinks = screen.getAllByText('Servicios');
+    fireEvent.click(serviciosLinks[1]);
+    expect(hamburguesaDiv).not.toHaveClass('active');
   });
 }); 

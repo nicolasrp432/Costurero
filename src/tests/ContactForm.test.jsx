@@ -1,7 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeAll } from 'vitest';
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import ContactForm from '../components/ContactForm/ContactForm';
+
+beforeAll(() => {
+  HTMLFormElement.prototype.submit = vi.fn();
+});
 
 describe('ContactForm', () => {
   it('envía el formulario correctamente y muestra mensaje de éxito', async () => {
