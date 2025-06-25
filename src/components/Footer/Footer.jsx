@@ -60,7 +60,7 @@ const Footer = () => {
             <ul className="contact-info">
               <li>
                 <i className="fas fa-map-marker-alt"></i>
-                <span>Calle Ejemplo 123, 28000 Madrid</span>
+                <span>Dirección: Calle Ejemplo 123, 28000 Madrid</span>
               </li>
               <li>
                 <i className="fas fa-phone"></i>
@@ -72,7 +72,7 @@ const Footer = () => {
               </li>
               <li>
                 <i className="fas fa-clock"></i>
-                <span>Lun-Vie: 10:00-19:00, Sáb: 10:00-14:00</span>
+                <span>Horario: Lun-Vie: 10:00-19:00, Sáb: 10:00-14:00</span>
               </li>
             </ul>
           </div>

@@ -109,7 +109,7 @@ const ServiceSection = ({
               className="service-image"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = 'src/assets/imagen.jpg';
+                e.target.src = '/images/imagen.jpg';
               }}
               whileHover={{ 
                 scale: 1.05,

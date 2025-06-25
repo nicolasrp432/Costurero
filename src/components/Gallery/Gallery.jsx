@@ -64,7 +64,7 @@ function Gallery({ initialCategory = 'all' }) {
               <img 
                 src={item.image} 
                 alt={item.title} 
-                onError={e => { e.target.onerror = null; e.target.src = '/imagen.jpg'; }}
+                onError={e => { e.target.onerror = null; e.target.src = '/images/imagen.jpg'; }}
               />
               <div className="gallery-item-overlay">
                 <span>Ver detalles</span>
@@ -88,7 +88,7 @@ function Gallery({ initialCategory = 'all' }) {
               <img 
                 src={selectedItem.image} 
                 alt={selectedItem.title}
-                onError={e => { e.target.onerror = null; e.target.src = '/imagen.jpg'; }}
+                onError={e => { e.target.onerror = null; e.target.src = '/images/imagen.jpg'; }}
               />
             </div>
             <div className="modal-details">

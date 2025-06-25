@@ -15,7 +15,7 @@ const Hero = () => {
         loop
         playsInline
       >
-        <source src="./src/assets/hero-video.mp4" type="video/mp4" />
+        <source src="/videos/hero-video.mp4" type="video/mp4" />
         {/* Add additional source elements for different video formats if needed */}
       </video>
       <div className="hero-overlay"></div>

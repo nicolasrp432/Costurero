@@ -41,13 +41,18 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="menu-toggle" onClick={toggleMenu}>
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-label="Toggle menu"
+          onClick={toggleMenu}
+        >
           <div className={`hamburger ${isOpen ? 'active' : ''}`}>
             <span></span>
             <span></span>
             <span></span>
           </div>
-        </div>
+        </button>
 
         {/* Desktop Navigation */}
         <nav className="desktop-nav">
@@ -80,11 +85,6 @@ const Navbar = () => {
             <li>
               <NavLink to="/nosotros" className={({ isActive }) => isActive ? 'active' : ''}>
                 Nosotros
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/calendario" className={({ isActive }) => isActive ? 'active' : ''}>
-                Calendario
               </NavLink>
             </li>
             <li>

@@ -96,7 +96,7 @@ const About = () => {
                 className="story-img"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = '/imagen.jpg';
+                  e.target.src = '/images/imagen.jpg';
                 }}
               />
             </motion.div>
@@ -171,7 +171,7 @@ const About = () => {
                     alt={member.name} 
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = '/imagen.jpg';
+                      e.target.src = '/images/imagen.jpg';
                     }}
                   />
                 </div>
@@ -276,7 +276,7 @@ const About = () => {
                   alt="Reconocimiento" 
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = '/imagen.jpg';
+                    e.target.src = '/images/imagen.jpg';
                   }}
                 />
               </div>
@@ -286,7 +286,7 @@ const About = () => {
                   alt="Reconocimiento" 
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = '/imagen.jpg';
+                    e.target.src = '/images/imagen.jpg';
                   }}
                 />
               </div>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { fetchRealGoogleReviews, fetchPlaceDetails, formatGoogleReview } from '../../services/googleReviewsService';
 import testimonialsMock from '../../mocks/testimonialsMock';
 import './Testimonials.css';
+import useGoogleReviewsStore from '../../services/googleReviewsStore';
 
 // Cambia a true para usar los datos simulados
 const USE_MOCK = true;
@@ -11,8 +12,11 @@ const Testimonials = () => {
   const [current, setCurrent] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
   const [activeTab, setActiveTab] = useState('testimonials');
-  const [googleReviews, setGoogleReviews] = useState([]);
-  const [placeDetails, setPlaceDetails] = useState(null);
+  const googleReviews = useGoogleReviewsStore(state => state.googleReviews);
+  const placeDetails = useGoogleReviewsStore(state => state.placeDetails);
+  const setGoogleReviews = useGoogleReviewsStore(state => state.setGoogleReviews);
+  const setPlaceDetails = useGoogleReviewsStore(state => state.setPlaceDetails);
+  const clearGoogleReviews = useGoogleReviewsStore(state => state.clearGoogleReviews);
   const [loading, setLoading] = useState(false);
 
   // Elegir fuente de datos
@@ -47,7 +51,7 @@ const Testimonials = () => {
 
       loadGoogleReviews();
     }
-  }, []);
+  }, [USE_MOCK, googleReviews.length, setGoogleReviews, setPlaceDetails]);
 
   // Autoplay functionality
   useEffect(() => {
@@ -150,7 +154,7 @@ const Testimonials = () => {
             alt={testimonial.name || testimonial.author}
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = 'src/assets/imagen.jpg';
+              e.target.src = '/images/imagen.jpg';
             }}
           />
         </div>

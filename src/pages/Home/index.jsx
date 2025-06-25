@@ -140,7 +140,7 @@ const Home = () => {
               variants={fadeInUp}
             >
               <div className="service-image">
-                <img src="src\assets\arreglo_transformacion.png" alt="Arreglos y Transformaciones" />
+                <img src="/images/arreglo_transformacion.png" alt="Arreglos y Transformaciones" />
                 <div className="service-overlay">
                   <Button to="/servicios#arreglos" type="white-outline">Ver Más</Button>
                 </div>
@@ -159,7 +159,7 @@ const Home = () => {
               variants={{...fadeInUp, transition: { duration: 0.6, delay: 0.1 }}}
             >
               <div className="service-image">
-                <img src="src\assets\confeccion_a_medida.png" alt="Confección a Medida" />
+                <img src="/images/confeccion_a_medida.png" alt="Confección a Medida" />
                 <div className="service-overlay">
                   <Button to="/servicios#confeccion" type="white-outline">Ver Más</Button>
                 </div>
@@ -178,7 +178,7 @@ const Home = () => {
               variants={{...fadeInUp, transition: { duration: 0.6, delay: 0.2 }}}
             >
               <div className="service-image">
-                <img src="src\assets\novivas.png" alt="Novia e Invitada" />
+                <img src="/images/novivas.png" alt="Novia e Invitada" />
                 <div className="service-overlay">
                   <Button to="/servicios#novia" type="white-outline">Ver Más</Button>
                 </div>
@@ -197,7 +197,7 @@ const Home = () => {
               variants={{...fadeInUp, transition: { duration: 0.6, delay: 0.3 }}}
             >
               <div className="service-image">
-                <img src="src\assets\textilhogar.png" alt="Textil Hogar" />
+                <img src="/images/textilhogar.png" alt="Textil Hogar" />
                 <div className="service-overlay">
                   <Button to="/servicios#hogar" type="white-outline">Ver Más</Button>
                 </div>
