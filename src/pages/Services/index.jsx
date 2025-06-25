@@ -36,7 +36,7 @@ const Services = () => {
       id: 'arreglos',
       title: 'Arreglos y Transformaciones',
       description: 'Adaptamos tus prendas favoritas para que luzcan como nuevas y se ajusten perfectamente a ti. Desde simples dobladillos hasta complejas transformaciones, nuestro equipo de profesionales garantiza un acabado impecable en cada trabajo.',
-      image: '/images/arreglo_transformacion.png',
+      image: '/images/arreglo_transformacion.webp',
       features: [
         'Ajustes de talla en todo tipo de prendas',
         'Arreglos de largos y dobladillos',
@@ -51,7 +51,7 @@ const Services = () => {
       id: 'confeccion',
       title: 'Confección a Medida',
       description: 'Diseñamos y confeccionamos piezas únicas adaptadas a tus gustos, necesidades y medidas exactas. Utilizamos tejidos de alta calidad y técnicas de costura tradicionales para crear prendas que te encajarán a la perfección.',
-      image: '/images/confeccion_a_medida.png',
+      image: '/images/confeccion_a_medida.webp',
       features: [
         'Trajes y conjuntos de chaqueta personalizados',
         'Camisas y blusas a medida',
@@ -67,7 +67,7 @@ const Services = () => {
       id: 'novia',
       title: 'Novia e Invitada',
       description: 'Creamos vestidos de ensueño para el día más especial. Desde diseños elegantes y clásicos hasta propuestas más modernas y originales, trabajamos mano a mano contigo para materializar el vestido perfecto que siempre has imaginado.',
-      image: '/images/novivas.png',
+      image: '/images/novivas.webp',
       features: [
         'Vestidos de novia a medida',
         'Arreglos y modificaciones de vestidos existentes',
@@ -82,7 +82,7 @@ const Services = () => {
       id: 'abrigos',
       title: 'Abrigos de Piel',
       description: 'Especialistas en la restauración, transformación y cuidado de prendas de piel. Damos nueva vida a abrigos antiguos adaptándolos a las tendencias actuales, manteniendo la calidad y el valor de la prenda original.',
-      image: '/images/abrigodecuero.png',
+      image: '/images/abrigodecuero.webp',
       features: [
         'Restauración de abrigos de piel antiguos',
         'Transformación y modernización de diseños',
@@ -98,7 +98,7 @@ const Services = () => {
       id: 'uniformes',
       title: 'Uniformes y Batas',
       description: 'Confeccionamos uniformes corporativos y escolares a medida, adaptados a las necesidades específicas de cada cliente. Ofrecemos servicios para empresas, colegios y profesionales que buscan transmitir una imagen coherente y profesional.',
-      image: '/images/uniforme.png',
+      image: '/images/uniforme.webp',
       features: [
         'Uniformes corporativos personalizados',
         'Batas para colegios, laboratorios y sanitarios',
@@ -113,7 +113,7 @@ const Services = () => {
       id: 'fiesta',
       title: 'Trajes de Fiesta',
       description: 'Creamos trajes de fiesta exclusivos para eventos especiales, diseñados según tus preferencias y confeccionados con acabados de alta costura. Nuestro objetivo es que luzcas espectacular y única en cada ocasión.',
-      image: '/images/fiesta.png',
+      image: '/images/fiesta.webp',
       features: [
         'Vestidos de fiesta a medida',
         'Trajes de ceremonia para hombre',
@@ -129,7 +129,7 @@ const Services = () => {
       id: 'hogar',
       title: 'Textil Hogar',
       description: 'Transformamos tu hogar con textiles personalizados de la más alta calidad. Desde cortinas elegantes hasta cojines decorativos, creamos piezas que se adaptan perfectamente a tu espacio y estilo de decoración.',
-      image: '/images/textilhogar.png',
+      image: '/images/textilhogar.webp',
       features: [
         'Cortinas a medida para cualquier ventana',
         'Cojines decorativos personalizados',
@@ -144,7 +144,7 @@ const Services = () => {
       id: 'clases',
       title: 'Clases de Patronaje',
       description: 'Compartimos nuestra experiencia y conocimientos a través de clases de patronaje y costura para todos los niveles. Aprende técnicas profesionales en un ambiente acogedor donde podrás desarrollar tu creatividad y habilidades.',
-      image: '/images/clases.png',
+      image: '/images/clases.webp',
       features: [
         'Clases para principiantes y niveles avanzados',
         'Grupos reducidos con atención personalizada',

@@ -68,11 +68,15 @@ function Gallery({ initialCategory = 'all' }) {
         {items.map(item => (
           <div key={item.id} className="gallery-item" onClick={() => openModal(item)}>
             <div className="gallery-item-image">
-              <img 
-                src={item.image} 
-                alt={item.title} 
-                onError={e => { e.target.onerror = null; e.target.src = '/images/novivas.png'; }}
-              />
+              <picture>
+                <source srcSet={item.image.replace('.png', '.webp')} type="image/webp" />
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  loading="lazy"
+                  onError={e => { e.target.onerror = null; e.target.src = '/images/novivas.webp'; }}
+                />
+              </picture>
               <div className="gallery-item-overlay">
                 <span>Ver detalles</span>
               </div>
@@ -92,11 +96,15 @@ function Gallery({ initialCategory = 'all' }) {
           <div className="modal-content">
             <button className="modal-close" onClick={closeModal}>&times;</button>
             <div className="modal-image">
-              <img 
-                src={selectedItem.image} 
-                alt={selectedItem.title}
-                onError={e => { e.target.onerror = null; e.target.src = '/images/novivas.png'; }}
-              />
+              <picture>
+                <source srcSet={selectedItem.image.replace('.png', '.webp')} type="image/webp" />
+                <img 
+                  src={selectedItem.image} 
+                  alt={selectedItem.title}
+                  loading="lazy"
+                  onError={e => { e.target.onerror = null; e.target.src = '/images/novivas.webp'; }}
+                />
+              </picture>
             </div>
             <div className="modal-details">
               <h2>{selectedItem.title}</h2>

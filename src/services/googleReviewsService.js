@@ -3,14 +3,22 @@ import { getDefaultReviews } from '../config/googleConfig';
 
 // Función para obtener reseñas reales de Google Places
 export const fetchRealGoogleReviews = async () => {
+  const cacheKey = 'googleReviewsCache';
+  const cacheExpiry = 1000 * 60 * 60; // 1 hora
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) {
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < cacheExpiry) {
+      console.log('✅ Reseñas reales obtenidas de caché');
+      return data;
+    }
+  }
   try {
     console.log('Intentando obtener reseñas reales de Google...');
-    
-    // Llamar a la función de Firebase
     const result = await getGoogleReviews();
     const data = result.data;
-    
     if (data.success && data.reviews) {
+      localStorage.setItem(cacheKey, JSON.stringify({ data: data.reviews, timestamp: Date.now() }));
       console.log('✅ Reseñas reales obtenidas:', data.reviews.length);
       return data.reviews;
     } else {
@@ -26,13 +34,22 @@ export const fetchRealGoogleReviews = async () => {
 
 // Función para obtener detalles del lugar (rating, número de reseñas, etc.)
 export const fetchPlaceDetails = async () => {
+  const cacheKey = 'googlePlaceDetailsCache';
+  const cacheExpiry = 1000 * 60 * 60; // 1 hora
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) {
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < cacheExpiry) {
+      console.log('✅ Detalles del lugar obtenidos de caché');
+      return data;
+    }
+  }
   try {
     console.log('Obteniendo detalles del lugar...');
-    
     const result = await getPlaceDetails();
     const data = result.data;
-    
     if (data.success && data.placeDetails) {
+      localStorage.setItem(cacheKey, JSON.stringify({ data: data.placeDetails, timestamp: Date.now() }));
       console.log('✅ Detalles del lugar obtenidos:', data.placeDetails);
       return data.placeDetails;
     } else {

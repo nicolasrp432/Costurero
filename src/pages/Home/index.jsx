@@ -159,7 +159,10 @@ const Home = () => {
               variants={{...fadeInUp, transition: { duration: 0.6, delay: 0.1 }}}
             >
               <div className="service-image">
-                <img src="/images/confeccion_a_medida.png" alt="Confección a Medida" />
+                <picture>
+                  <source srcSet="/images/confeccion_a_medida.webp" type="image/webp" />
+                  <img src="/images/confeccion_a_medida.png" alt="Confección a Medida" loading="lazy" />
+                </picture>
                 <div className="service-overlay">
                   <Button to="/servicios#confeccion" type="white-outline">Ver Más</Button>
                 </div>
@@ -178,7 +181,10 @@ const Home = () => {
               variants={{...fadeInUp, transition: { duration: 0.6, delay: 0.2 }}}
             >
               <div className="service-image">
-                <img src="/images/novivas.png" alt="Novia e Invitada" />
+                <picture>
+                  <source srcSet="/images/novivas.webp" type="image/webp" />
+                  <img src="/images/novivas.png" alt="Novia e Invitada" loading="lazy" />
+                </picture>
                 <div className="service-overlay">
                   <Button to="/servicios#novia" type="white-outline">Ver Más</Button>
                 </div>
@@ -197,7 +203,10 @@ const Home = () => {
               variants={{...fadeInUp, transition: { duration: 0.6, delay: 0.3 }}}
             >
               <div className="service-image">
-                <img src="/images/textilhogar.png" alt="Textil Hogar" />
+                <picture>
+                  <source srcSet="/images/textilhogar.webp" type="image/webp" />
+                  <img src="/images/textilhogar.png" alt="Textil Hogar" loading="lazy" />
+                </picture>
                 <div className="service-overlay">
                   <Button to="/servicios#hogar" type="white-outline">Ver Más</Button>
                 </div>

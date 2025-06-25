@@ -103,19 +103,19 @@ const ServiceSection = ({
               transition: { duration: 0.3 }
             }}
           >
-            <motion.img 
-              src={image} 
-              alt={title} 
-              className="service-image"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/images/imagen.jpg';
-              }}
-              whileHover={{ 
-                scale: 1.05,
-                transition: { duration: 0.4 }
-              }}
-            />
+            <picture>
+              <source srcSet={image.replace('.png', '.webp')} type="image/webp" />
+              <img 
+                src={image.replace('.webp', '.png')} 
+                alt={title} 
+                className="service-image"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/images/imagen.jpg';
+                }}
+              />
+            </picture>
           </motion.div>
 
           <motion.div 

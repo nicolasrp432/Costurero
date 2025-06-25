@@ -149,14 +149,18 @@ const Testimonials = () => {
       <p className="testimonial-text">{testimonial.content}</p>
       <div className="testimonial-author">
         <div className="testimonial-image">
-          <img 
-            src={testimonial.image || testimonial.profileImage} 
-            alt={testimonial.name || testimonial.author}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = '/images/imagen.jpg';
-            }}
-          />
+          <picture>
+            <source srcSet={(testimonial.image || testimonial.profileImage)?.replace('.png', '.webp')} type="image/webp" />
+            <img 
+              src={testimonial.image || testimonial.profileImage} 
+              alt={testimonial.name || testimonial.author}
+              loading="lazy"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/images/imagen.jpg';
+              }}
+            />
+          </picture>
         </div>
         <div className="testimonial-info">
           <h4>{testimonial.name || testimonial.author}</h4>
